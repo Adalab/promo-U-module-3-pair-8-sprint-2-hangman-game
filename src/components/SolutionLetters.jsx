@@ -1,14 +1,14 @@
 import "../styles/layout/_letters.scss";
 
 
-function SolutionLetters(prop) {
+function SolutionLetters ({ word, userLetters }) {
 
     const renderSolutionLetters = () => {
-        const wordLetters = prop.word.split("");
+        const wordLetters = word.split("");
         return wordLetters.map((eachLetter, index) => {
           return (
             <li key={index} className="letter">
-              {prop.userLetters.includes(eachLetter) ? eachLetter : ""}
+              {userLetters.includes(eachLetter) ? eachLetter : ""}
             </li>
           );
         });

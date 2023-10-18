@@ -6,12 +6,13 @@ import Header from "./Header";
 import Dummy from "./Dummy";
 import SolutionLetters from "./SolutionLetters";
 import ErrorLetters from "./ErrorLetters ";
+import Form from "./Form";
 
 function App() {
   const [lastLetter, setLastLetter] = useState("");
   const [word, setWord] = useState("");
   const [userLetters, setUserLetters] = useState([]);
-
+  
   const failedLetters = userLetters.filter((letter) => !word.includes(letter));
   console.log(failedLetters);
   const numberOfErrors = failedLetters.length;
@@ -26,33 +27,12 @@ function App() {
       });
   }, []);
 
-  const handleLetter = (ev) => {
-    ev.preventDefault();
-    const letterPress = ev.target.value;
-    const regex = /^[a-z]+$/;
-    if (regex.test(letterPress) || letterPress === "") {
-      setLastLetter(letterPress);
-      if (letterPress !== "") {
-        setUserLetters([...userLetters, letterPress]);
-      }
-    } else if (
-      letterPress === "Backspace" ||
-      letterPress === " " ||
-      letterPress === "Enter"
-    ) {
-      setLastLetter("");
-    }
-  };
-
-  const handleSubmit = (ev) => {
-    ev.preventDefault();
-  };
-
   
 
- 
-
-  
+ const handleLastLetter = (value)=>{
+setLastLetter(value);
+setUserLetters([...userLetters, value]);
+};
 
   return (
     <div className="page">
@@ -61,21 +41,7 @@ function App() {
         <section>
           <SolutionLetters word={word} userLetters={userLetters}/>
           <ErrorLetters word={word} userLetters={userLetters}/>
-          <form onSubmit={handleSubmit} className="form">
-            <label className="title" htmlFor="last-letter">
-              Escribe una letra:
-            </label>
-            <input
-              autoComplete="off"
-              className="form__input"
-              maxLength="1"
-              type="text"
-              name="last-letter"
-              id="last-letter"
-              value={lastLetter}
-              onChange={handleLetter}
-            />
-          </form>
+        <Form lastLetter={lastLetter} userLetters={userLetters} handleLastLetter= {handleLastLetter}/>
         </section>
         <Dummy numberOfErrors= {numberOfErrors}/>
       </main>
