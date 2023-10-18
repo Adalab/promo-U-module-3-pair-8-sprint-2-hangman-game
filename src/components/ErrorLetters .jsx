@@ -19,4 +19,4 @@ function ErrorLetters (prop) {
           </div>
     )
 }
-export default ErrorLetters
+export default ErrorLetters;

@@ -1,7 +1,9 @@
-function Dummy(prop) {
+import PropTypes from "prop-types";
+
+function Dummy({ numberOfErrors }) {
   return (
     <>
-      <section className={`dummy error-${prop.numberOfErrors}`}>
+      <section className={`dummy error-${numberOfErrors}`}>
         <span className="error-13 eye"></span>
         <span className="error-12 eye"></span>
         <span className="error-11 line"></span>
@@ -19,5 +21,9 @@ function Dummy(prop) {
     </>
   );
 }
+
+Dummy.propTypes = {
+  numberOfErrors: PropTypes.string,
+};
 
 export default Dummy;
