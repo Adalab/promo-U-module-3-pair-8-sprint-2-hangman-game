@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import { Route, Routes } from "react-router-dom";
 import Instructions from "./Instructions";
 import Options from "./Options";
+import Loading from "./Loading"
 
 function App() {
   const [lastLetter, setLastLetter] = useState("");
@@ -36,6 +37,13 @@ function App() {
     setUserLetters([...userLetters, value]);
   };
 
+  const handleWord = (value) =>{
+    setWord(value);
+    setUserLetters([]);
+    setLastLetter([]);
+
+  }
+
   return (
     <div className="page">
       <Header />
@@ -60,7 +68,7 @@ function App() {
             }
           />
           <Route path="/instructions" element={<Instructions />} />
-          <Route path="/options" element={<Options/>} />
+          <Route path="/options" element={<Options word={word} handleWord={handleWord}/>} />
         </Routes>
       </main>
 
