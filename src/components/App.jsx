@@ -7,12 +7,16 @@ import Dummy from "./Dummy";
 import SolutionLetters from "./SolutionLetters";
 import ErrorLetters from "./ErrorLetters ";
 import Form from "./Form";
+import Footer from "./Footer";
+import { Route, Routes } from "react-router-dom";
+import Instructions from "./Instructions";
+import Options from "./Options";
 
 function App() {
   const [lastLetter, setLastLetter] = useState("");
   const [word, setWord] = useState("");
   const [userLetters, setUserLetters] = useState([]);
-  
+
   const failedLetters = userLetters.filter((letter) => !word.includes(letter));
   console.log(failedLetters);
   const numberOfErrors = failedLetters.length;
@@ -27,24 +31,40 @@ function App() {
       });
   }, []);
 
-  
-
- const handleLastLetter = (value)=>{
-setLastLetter(value);
-setUserLetters([...userLetters, value]);
-};
+  const handleLastLetter = (value) => {
+    setLastLetter(value);
+    setUserLetters([...userLetters, value]);
+  };
 
   return (
     <div className="page">
-      <Header/>
+      <Header />
       <main className="main">
-        <section>
-          <SolutionLetters word={word} userLetters={userLetters}/>
-          <ErrorLetters word={word} userLetters={userLetters}/>
-        <Form lastLetter={lastLetter} userLetters={userLetters} handleLastLetter= {handleLastLetter}/>
-        </section>
-        <Dummy numberOfErrors= {numberOfErrors}/>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                {" "}
+                <section>
+                  <SolutionLetters word={word} userLetters={userLetters} />
+                  <ErrorLetters word={word} userLetters={userLetters} />
+                  <Form
+                    lastLetter={lastLetter}
+                    userLetters={userLetters}
+                    handleLastLetter={handleLastLetter}
+                  />
+                </section>
+                <Dummy numberOfErrors={numberOfErrors} />
+              </>
+            }
+          />
+          <Route path="/instructions" element={<Instructions />} />
+          <Route path="/options" element={<Options/>} />
+        </Routes>
       </main>
+
+      <Footer />
     </div>
   );
 }
