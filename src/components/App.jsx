@@ -17,6 +17,7 @@ function App() {
   const [lastLetter, setLastLetter] = useState("");
   const [word, setWord] = useState("");
   const [userLetters, setUserLetters] = useState([]);
+   const [isLoading, setIsLoading]=useState(true);
 
   const failedLetters = userLetters.filter((letter) => !word.includes(letter));
   console.log(failedLetters);
@@ -29,6 +30,7 @@ function App() {
       .then((Data) => {
         // Cuando la API responde guardamos los datos en el estado para que se vuelva a renderizar el componente
         setWord(Data.word);
+        setIsLoading (false);
       });
   }, []);
 
@@ -48,6 +50,7 @@ function App() {
     <div className="page">
       <Header />
       <main className="main">
+        <Loading isLoading={isLoading}/>
         <Routes>
           <Route
             path="/"
