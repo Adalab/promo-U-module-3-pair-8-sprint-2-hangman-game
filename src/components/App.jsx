@@ -37,6 +37,9 @@ function App() {
   const handleLastLetter = (value) => {
     setLastLetter(value);
     setUserLetters([...userLetters, value]);
+    setTimeout(() => {
+      setLastLetter('');
+    }, 1000);
   };
 
   const handleWord = (value) =>{
